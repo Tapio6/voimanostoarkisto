@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tuloslista</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Tulosarkisto</h1>
+	<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Kirjaudu Ulos" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
+	<table>
+		<tr>
+			<th>Nimi</th>
+			<th>Paino (kg)</th>
+			<th>Laji</th>
+			<th>Tulos (kg)</th>
+		</tr>
+		<tr th:each = "tulos : ${tulokset}">
+			<td th:text="${tulos.etuNimi} + ' ' + ${tulos.sukuNimi}"></td>
+			<td th:text="${tulos.paino}"></td>
+			<td th:text="${tulos.laji.type}"></td>
+			<td th:text="${tulos.tulos}"></td>
+				<td sec:authorize="hasRole('ADMIN')"><a
+					th:href="@{/poista/{id}(id=${tulos.id})}">Poista</a></td>
+				<td sec:authorize="hasRole('ADMIN')"><a
+					th:href="@{/muokkaa/{id}(id=${tulos.id})}">Muokkaa</a></td>
+		</tr>
+	</table>
+	<td sec:authorize="hasRole('ADMIN')"><a href="/lisää">Lisää tulos</a></td>
+	 
+</body>
+</html>

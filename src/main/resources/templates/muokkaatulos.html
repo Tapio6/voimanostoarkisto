@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tuloslista</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Muokkaa tulosta</h1>
+	<div>
+		<form th:object="${tulos}" th:action="@{../tallenna}" action="#" method="post">
+			<label for="ename">Etunimi</label>
+			<input type="text" id="ename" th:field="*{etuNimi}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="sname">Sukunimi</label>
+			<input type="text" id="sname" th:field="*{sukuNimi}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="weight">Paino</label>
+			<input type="text" id="paino" th:field="*{paino}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="tulos">Tulos</label>
+			<input type="text" id="tulos" th:field="*{tulos}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="lajilista">Laji</label>
+			 <select id="lajilista" th:field="*{laji}" class="form-control">
+       			<option th:each="laji: ${lajit}" th:value="${laji.lajiId}" th:text="${laji.type}"></option>
+    		</select>
+    		
+			
+			<input class="btn btn-success" type="submit" value="Tallenna"></input>
+	
+		</form>
+	</div>
+</body>
+</html>
